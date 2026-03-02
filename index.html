@@ -96,16 +96,20 @@
                 <p>Secure your spot for the future of AI.</p>
                 <form id="registrationForm">
                     <div class="input-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" id="fullName" required placeholder="Enter your full name">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required placeholder="Enter your full name">
                     </div>
                     <div class="input-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" required placeholder="name@example.com">
                     </div>
                     <div class="input-group">
-                        <label for="collegeName">College Name</label>
-                        <input type="text" id="collegeName" required placeholder="e.g. TGPCET">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="Enter phone number">
+                    </div>
+                    <div class="input-group">
+                        <label for="college">College Name</label>
+                        <input type="text" id="college" required placeholder="e.g. TGPCET">
                     </div>
                     <div class="input-group">
                         <label for="eventSelect">Select Competition</label>
@@ -116,6 +120,10 @@
                             <option value="poster">PosterPanaroma</option>
                             <option value="esports">E-Sports</option>
                         </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="transactionId">Transaction ID</label>
+                        <input type="text" id="transactionId" required placeholder="Payment transaction ID">
                     </div>
                     <button type="submit" class="btn-primary form-submit">Register for Summit 🚀</button>
                     <div id="formMessage" class="hidden"></div>
@@ -160,6 +168,54 @@
     <!-- Particles.js Library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+        // Your Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAyZ3nDKe77YWVoQQuw_NwmwLKG_idMFvA",
+            authDomain: "neural-nexus-795fd.firebaseapp.com",
+            projectId: "neural-nexus-795fd",
+            storageBucket: "neural-nexus-795fd.appspot.com",
+            messagingSenderId: "858176950248",
+            appId: "1:858176950248:web:2e8b22ee09fba6855c5e5d"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Form submit
+        const form = document.getElementById("registrationForm");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const college = document.getElementById("college").value;
+            const transactionId = document.getElementById("transactionId").value;
+
+            try {
+                await addDoc(collection(db, "registrations"), {
+                    name,
+                    email,
+                    phone,
+                    college,
+                    transactionId,
+                    timestamp: new Date()
+                });
+
+                alert("Registration Successful!");
+                form.reset();
+            } catch (error) {
+                alert("Error submitting form");
+                console.error(error);
+            }
+        });
+    </script>
 </body>
 
 </html>

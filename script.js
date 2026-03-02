@@ -17,33 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form Submission Handler (Mock)
-    const form = document.getElementById('registrationForm');
-    const formMessage = document.getElementById('formMessage');
-
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Get values
-            const name = document.getElementById('fullName').value;
-            const event = document.getElementById('eventSelect');
-            const eventName = event.options[event.selectedIndex].text;
-
-            // Show success message
-            formMessage.textContent = `Awesome, ${name}! You're registered for ${eventName}.`;
-            formMessage.className = 'success';
-            formMessage.classList.remove('hidden');
-
-            // Reset form
-            form.reset();
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                formMessage.classList.add('hidden');
-            }, 5000);
-        });
-    }
 
     // Add glowing effect to mouse movement for extra "cool" factor on hero
     const hero = document.getElementById('hero');
