@@ -560,6 +560,51 @@ option {
     border: 1px solid #00ff80;
 }
 
+/* Payment Section inside Form */
+.payment-section {
+    text-align: center;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.payment-section img {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.payment-title {
+    font-size: 1.1rem;
+    color: var(--accent-cyan);
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+.qr-container {
+    background: transparent;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.qr-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.payment-instructions {
+    font-size: 0.9rem !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: 0 !important;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
 /* Footer */
 .footer {
     margin-top: 50px;
