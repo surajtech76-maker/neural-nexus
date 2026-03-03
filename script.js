@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         email: 'Please enter a valid email address.',
         phone: 'Must be a valid 10-digit Indian phone number.',
         college: 'College name is required.',
-        eventSelect: 'Please select a competition.',
+        competition: 'Please select a competition.',
         transactionId: 'Invalid transaction ID format.'
     };
 
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         email: false,
         phone: false,
         college: false,
-        eventSelect: false,
+        competition: false,
         transactionId: false
     };
 
