@@ -293,7 +293,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(formData)
                 });
 
-                const data = await response.json();
+                let data;
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    data = await response.json();
+                } else {
+                    const text = await response.text();
+                    console.error("Non-JSON Server Response:", text);
+                    throw new Error(`Server returned an invalid response (Status ${response.status}).`);
+                }
 
                 if (response.ok) {
                     // Success

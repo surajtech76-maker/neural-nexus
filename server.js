@@ -77,12 +77,19 @@ app.use(express.static(__dirname));
 const registerLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 5,
-    message: { error: "Too many registrations created from this IP, please try again." }
+    handler: (req, res) => {
+        return res.status(429).json({ error: "Too many registrations created from this IP, please try again." });
+    }
 });
 
 // ==========================================
-// 3. SECURE API ROUTE
+// 3. SECURE API ROUTES
 // ==========================================
+
+// Simple server health check route
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: "Server is running" });
+});
 
 const validCompetitions = ['hackfest', 'prompt', 'poster', 'esports'];
 
@@ -156,7 +163,12 @@ app.post('/api/register',
     }
 );
 
-// 4. Global Error Handler (Hides Stack Traces in Production)
+// 4. Catch-all for undefined API routes to ensure JSON is returned
+app.use('/api/*', (req, res) => {
+    res.status(404).json({ error: "API Endpoint not found." });
+});
+
+// 5. Global Error Handler (Hides Stack Traces in Production)
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({
