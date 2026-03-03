@@ -284,11 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Form Data being sent:", formData);
 
             try {
-                // Pointing to backend server dynamically based on environment
-                // If on Render or production, use relative URL (or full Render URL if backend is totally separate)
-                const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-                    ? 'http://localhost:5000/api/register'
-                    : '/api/register';
+                // Pointing to the backend Server (Render native routing)
+                const API_URL = '/api/register';
 
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -321,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 console.error("Submission Error:", error);
-                formMessage.textContent = 'Unable to connect to the server. Please check your internet or try again later.';
+                formMessage.textContent = 'Unable to connect to the server: ' + error.message;
                 formMessage.classList.add('error');
                 formMessage.classList.remove('hidden');
             } finally {
