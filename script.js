@@ -284,8 +284,13 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Form Data being sent:", formData);
 
             try {
-                // Pointing to local backend server
-                const response = await fetch('http://localhost:5000/api/register', {
+                // Pointing to backend server dynamically based on environment
+                // If on Render or production, use relative URL (or full Render URL if backend is totally separate)
+                const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                    ? 'http://localhost:5000/api/register'
+                    : '/api/register';
+
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)

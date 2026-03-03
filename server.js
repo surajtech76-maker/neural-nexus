@@ -65,14 +65,19 @@ app.use(cors({
     }
 }));
 
-// Body Parser: Limit payload size to prevent DOS attacks
+// Body Parser: Limit payload size to prevent DOS attacks (Must be before routes!)
 app.use(express.json({ limit: '10kb' }));
+
+// Serve static frontend files (HTML, CSS, JS) from the current directory
+// This allows a single Render Web Service to host both frontend + backend!
+const path = require('path');
+app.use(express.static(__dirname));
 
 // Rate Limiter: Prevent Spam / Brute Force on Registration
 const registerLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes window
-    max: 5, // limit each IP to 5 registration requests per windowMs
-    message: { error: "Too many registrations created from this IP, please try again after 15 minutes." }
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    message: { error: "Too many registrations created from this IP, please try again." }
 });
 
 // ==========================================
