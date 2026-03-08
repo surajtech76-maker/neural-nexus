@@ -1,5 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Countdown Timer Logic
+    const countdownContainer = document.getElementById('countdown');
+    const eventStartedMessage = document.getElementById('event-started-message');
+
+    // Set Target Date: 11 MARCH 2026 AT 10:30 AM
+    const targetDate = new Date('March 11, 2026 10:30:00').getTime();
+
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    function updateCountdown() {
+        if (!countdownContainer) return;
+
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            countdownContainer.classList.add('hidden');
+            if (eventStartedMessage) {
+                eventStartedMessage.classList.remove('hidden');
+            }
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Update elements and trigger animation if value changed
+        updateTimeValue(daysEl, formatTime(days));
+        updateTimeValue(hoursEl, formatTime(hours));
+        updateTimeValue(minutesEl, formatTime(minutes));
+        updateTimeValue(secondsEl, formatTime(seconds));
+    }
+
+    function formatTime(time) {
+        return time < 10 ? `0${time}` : time;
+    }
+
+    function updateTimeValue(element, newValue) {
+        if (element && element.innerText !== String(newValue)) {
+            element.innerText = newValue;
+            // Retrigger animation
+            element.style.animation = 'none';
+            element.offsetHeight; // trigger reflow
+            element.style.animation = null;
+        }
+    }
+
+    updateCountdown(); // Initial call
+    const countdownInterval = setInterval(updateCountdown, 1000); // Update every second
+
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -27,11 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Get values
             const name = document.getElementById('fullName').value;
-            const event = document.getElementById('eventSelect');
-            const eventName = event.options[event.selectedIndex].text;
+            const mobile = document.getElementById('mobileNo').value;
+            const eventSelect = document.getElementById('eventSelect');
+            const eventName = eventSelect.options[eventSelect.selectedIndex].text;
+            const transactionId = document.getElementById('transactionId').value;
 
             // Show success message
-            formMessage.textContent = `Awesome, ${name}! You're registered for ${eventName}.`;
+            formMessage.textContent = `Awesome, ${name}! You've registered for ${eventName}. Payment Txn: ${transactionId} is under review.`;
             formMessage.className = 'success';
             formMessage.classList.remove('hidden');
 

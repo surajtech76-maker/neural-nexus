@@ -49,15 +49,77 @@
 
                 <div class="badge glass mt-4">Explore Technology - Shape Tomorrow</div>
 
-                <div class="event-details glass">
+                <div class="event-details glass mt-4">
                     <p><strong>11-12 MARCH 2026 AT 10:30 AM</strong></p>
                     <p>Venue: TGPCET Campus, 3rd Building 4th floor<br>AI&ML Department, Wardha Rd., Mohgaon.</p>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div class="countdown-container glass mt-4" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+                <div id="event-started-message" class="hidden glass mt-4">
+                    <h3 class="gradient-text">EVENT STARTED!</h3>
                 </div>
 
                 <!-- Cool AI Graphic Container -->
                 <div class="ai-graphic-container">
                     <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800"
                         alt="AI Neural Brain" class="floating-ai-img ghost-effect">
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about-section reveal">
+            <h2 class="section-title">ABOUT THE EVENT</h2>
+            <div class="about-container glass">
+                <div class="about-content">
+                    <h3 class="about-headline">Welcome to NEURAL NEXUS 2K26!</h3>
+                    <p class="about-description">
+                        Gathering students to showcase their creativity and advance their workflow with the latest
+                        trends in Artificial Intelligence. This summit is a premier platform for innovation, creativity,
+                        and real-world problem-solving that brings together students, developers, tech enthusiasts, and
+                        tech entrepreneurs from across the region.
+                    </p>
+                </div>
+
+                <div class="highlights-grid">
+                    <div class="highlight-item">
+                        <div class="highlight-icon glass">🤝</div>
+                        <h4>Networking</h4>
+                        <p>Connect with industry experts</p>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon glass">🧠</div>
+                        <h4>Learning</h4>
+                        <p>Master cutting-edge AI trends</p>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon glass">💡</div>
+                        <h4>Innovation</h4>
+                        <p>Solve real-world problems</p>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon glass">🚀</div>
+                        <h4>Opportunities</h4>
+                        <p>Launch your tech career</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -104,6 +166,11 @@
                         <input type="email" id="email" required placeholder="name@example.com">
                     </div>
                     <div class="input-group">
+                        <label for="mobileNo">Mobile Number</label>
+                        <input type="tel" id="mobileNo" required placeholder="+91 1234567890" pattern="[0-9]{10,13}">
+                    </div>
+
+                    <div class="input-group">
                         <label for="collegeName">College Name</label>
                         <input type="text" id="collegeName" required placeholder="e.g. TGPCET">
                     </div>
@@ -116,6 +183,22 @@
                             <option value="poster">PosterPanaroma</option>
                             <option value="esports">E-Sports</option>
                         </select>
+                    </div>
+
+                    <!-- Payment Section -->
+                    <div class="payment-section glass" style="padding: 20px; text-align: center; margin: 10px 0;">
+                        <label
+                            style="color: var(--accent-cyan); display: block; margin-bottom: 15px; font-weight: bold;">Scan
+                            to Pay Participation Fee</label>
+                        <div class="qr-container"
+                            style="background: white; padding: 10px; border-radius: 10px; display: inline-block; margin-bottom: 15px;">
+                            <!-- Payment QR Code -->
+                            <img src="qr.jpeg" alt="Payment QR Code" width="150" height="150">
+                        </div>
+                        <div class="input-group" style="text-align: left;">
+                            <label for="transactionId">Transaction ID</label>
+                            <input type="text" id="transactionId" required placeholder="Enter UPI/Bank Transaction ID">
+                        </div>
                     </div>
                     <button type="submit" class="btn-primary form-submit">Register for Summit 🚀</button>
                     <div id="formMessage" class="hidden"></div>
